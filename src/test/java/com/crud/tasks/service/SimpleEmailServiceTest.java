@@ -27,7 +27,6 @@ class SimpleEmailServiceTest {
     @Test
     public void shouldSendEmail(){
         //Given
-        //Mail mail = new Mail("test@tes.com", "Test", "Test message");
         Mail mail =  Mail.builder()
                 .mailTo("test@test.com")
                 .toCc("test1@test.com")
