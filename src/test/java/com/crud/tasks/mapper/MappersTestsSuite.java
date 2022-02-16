@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MappersTestsSuite {
 
 
     @Test
-    void TrelloCardMapperTest(){
+    void trelloCardMapperTest(){
         //Given
         String name = "Test name";
         String description = "Test description";
@@ -33,7 +32,7 @@ public class MappersTestsSuite {
     }
 
     @Test
-    void TrelloListMapperTest(){
+    void trelloListMapperTest(){
         //Given
         String id = "11237";
         String name = "Test name";
@@ -61,7 +60,7 @@ public class MappersTestsSuite {
     }
 
     @Test
-    void TrelloBoardMapperTest(){
+    void trelloBoardMapperTest(){
         //Given
         String id = "11237";
         String name = "Test name";
