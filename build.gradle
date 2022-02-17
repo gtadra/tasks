@@ -27,6 +27,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'com.google.code.gson:gson'
 
 	runtimeOnly 'mysql:mysql-connector-java'
 	runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.3.1'

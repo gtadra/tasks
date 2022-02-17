@@ -10,7 +10,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MappersTestsSuite {
+public class MappersTrelloTestsSuite {
 
 
     @Test
