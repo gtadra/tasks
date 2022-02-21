@@ -23,10 +23,20 @@ public class SimpleEmailService {
     private final JavaMailSender javaMailSender;
 
 
-    public void send(final Mail mail) {
+    public void sendSimpeMail(final Mail mail) {
         log.info("Starting email preparation...");
         try {
-            MimeMessagePreparator mailMessage = createMimeMessage(mail);
+            SimpleMailMessage mailMessage = createMailMessage(mail);
+            javaMailSender.send(mailMessage);
+            log.info("Email has been sent.");
+        } catch (MailException e) {
+            log.error("Failed to process email sending: " + e.getMessage(), e);
+        }
+    }
+
+    public void send(final MimeMessagePreparator mailMessage) {
+        log.info("Starting email preparation...");
+        try {
             javaMailSender.send(mailMessage);
             log.info("Email has been sent.");
         } catch (MailException e) {
@@ -46,12 +56,21 @@ public class SimpleEmailService {
         return mailMessage;
     }
 
-    private MimeMessagePreparator createMimeMessage(final Mail mail) {
+    public MimeMessagePreparator createTrelloNewCardMimeMessage(final Mail mail) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
             messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+        };
+    }
+
+    public MimeMessagePreparator createInformationEmail(final Mail mail) {
+        return mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(mailCreatorService.buildInformationEmail(mail.getMessage()), true);
         };
     }
 }

@@ -7,6 +7,7 @@ import com.crud.tasks.domain.Mail;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,12 +28,14 @@ public class TrelloService {
     public CreatedTrelloCardDto createTrelloCard(final TrelloCardDto trelloCardDto){
         CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
 
-        Optional.ofNullable(newCard).ifPresent(card -> emailService.send(new Mail(
+        Mail mail = new Mail(
                 adminConfig.getAdminMail(),
                 null,
                 SUBJECT,
-                "New card: " + trelloCardDto.getName() + " has been created on your Trello account"
-        )));
+                "New card: " + trelloCardDto.getName() + " has been created on your Trello account");
+        MimeMessagePreparator mailMessage = emailService.createTrelloNewCardMimeMessage(mail);
+
+        Optional.ofNullable(newCard).ifPresent(card -> emailService.send(mailMessage));
 
         return newCard;
     }

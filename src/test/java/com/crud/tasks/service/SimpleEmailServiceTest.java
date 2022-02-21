@@ -42,7 +42,7 @@ class SimpleEmailServiceTest {
         Optional<String> toCC = Optional.ofNullable(mail.getToCc());
         toCC.ifPresent(n -> mailMessage.setCc(n));
         //When
-        simpleEmailService.send(mail);
+        simpleEmailService.sendSimpeMail(mail);
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
     }
